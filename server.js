@@ -8,7 +8,7 @@ var express     = require('express');           // call express
 var app         = express();                    // define our app using express
 var bodyParser  = require('body-parser');       // parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 var mongoose    = require('mongoose');          // noSQL stuff
-var Bear        = require('./app/models/bear'); // our bear model
+var Bear        = require('./app/models/bear'); // our Bear model
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -76,6 +76,25 @@ router.route('/bears/:bear_id')
             res.json(bear);
         })
     })
+
+    // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+    .put(function(req, res){
+        Bear.findById(req.params.bear_id, function(err, bear){
+            if(err) {
+                res.send(err);
+            }
+            // update the damn bears info
+            bear.name = req.body.name;
+
+            // save the damn bear
+            bear.save(function(err) {
+                if (err) {
+                    res.send(err);
+                }
+                res.json({ message: 'Bear updated!' });
+            })
+        })
+    });
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
