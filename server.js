@@ -10,14 +10,14 @@ var bodyParser  = require('body-parser');       // parse incoming request bodies
 var mongoose    = require('mongoose');          // noSQL stuff
 var Bear        = require('./app/models/bear'); // our bear model
 
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
-mongoose.createConnection('mongodb://localhost/myappdatabase');
+
+mongoose.connect('mongodb://localhost/app');
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -45,7 +45,6 @@ router.route('/bears')
     .post(function(req, res) {
         var bear = new Bear();      // create a new instance of the Bear model
         bear.name = req.body.name;  // set the bears name (comes from the request)
-
         // save the bear and check for errors
         bear.save(function(err) {
             if (err)
