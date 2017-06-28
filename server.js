@@ -4,9 +4,12 @@
 // =============================================================================
 
 // call the packages we need
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
-var bodyParser = require('body-parser');
+var express     = require('express');           // call express
+var app         = express();                    // define our app using express
+var bodyParser  = require('body-parser');       // parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+var mongoose    = require('mongoose');          // noSQL stuff
+var Bear        = require('./app/models/bear'); // our bear model
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -14,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
+mongoose.connect('mongodb://localhost/myappdatabase');
 
 // ROUTES FOR OUR API
 // =============================================================================
