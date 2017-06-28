@@ -15,10 +15,9 @@ var Bear        = require('./app/models/bear'); // our bear model
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
-
-mongoose.connect('mongodb://localhost/app');
-
+var port = process.env.PORT || 8080;            // set our port
+mongoose.connect('mongodb://localhost/app');    // > mongod
+ 
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
@@ -51,10 +50,16 @@ router.route('/bears')
                 res.send(err);
 
             res.json({ message: 'Bear created!' });
-        });
-        
+        })
+    })
+    .get(function(req,res) {
+        Bear.find(function(err, bears) {
+            if(err) {
+                res.send(err);
+            }
+            res.send(bears);
+        })
     });
-
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
