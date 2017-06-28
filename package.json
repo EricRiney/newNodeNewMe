@@ -1,0 +1,27 @@
+{
+  "name": "restful",
+  "version": "1.0.0",
+  "description": "Node RESTful with Mongoose on the back",
+  "main": "index.js",
+  "scripts": {
+    "test": "lol"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricRiney/newNodeNewMe.git"
+  },
+  "keywords": [
+    "#fml"
+  ],
+  "author": "Eric Riner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricRiney/newNodeNewMe/issues"
+  },
+  "homepage": "https://github.com/EricRiney/newNodeNewMe#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.0"
+  }
+}
