@@ -95,7 +95,7 @@ router.route('/bears/:bear_id')
             })
         })
     })
-
+    
     // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
     .delete(function(req, res){
         Bear.remove({
